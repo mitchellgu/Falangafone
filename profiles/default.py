@@ -7,7 +7,7 @@ from Leap import Finger
 def clip(num, a, b):
   return min(max(num,a),b)
 
-class DefaultProfile():
+class DefaultProfile:
 
   FINGER_IDS = [Finger.TYPE_THUMB, Finger.TYPE_INDEX, Finger.TYPE_MIDDLE, Finger.TYPE_RING, Finger.TYPE_PINKY]
   ROLL_GAIN = 1/4.0
