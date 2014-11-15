@@ -9,12 +9,12 @@ from default import *
 s = Server().boot()
 s.start()
 snd = "audio/call_me_maybe.aiff"
-sf = SfPlayer(snd, mul=0.5).out()
+source = SfPlayer(snd)
 
 # Initialize Leap Controller
 controller = Leap.Controller()
 
-profile = DefaultProfile()
+profile = DefaultProfile(source)
 
 # Initialize offset Counter, Timestep
 i = 0
@@ -23,8 +23,8 @@ TIMESTEP = 0.05
 while True:
     now = time.time()  # get the time
     print i
-    if sf.isPlaying():
-      i += 1 * sf.speed
+    if profile.isPlaying():
+      i += 1 * source.speed
 
     if(controller.is_connected): #controller is a Leap.Controller object
       # Get frame
@@ -35,14 +35,14 @@ while True:
       # Pause or play
       if len(frame.hands) == 2:
         height = frame.hands[0].palm_position.y + frame.hands[1].palm_position.y
-        if sf.isPlaying() and height < 200.0: # If playing and hands are down
-          sf.stop()
-        elif height>200.0 and not sf.isPlaying(): # If not playing and hands are up
-          sf.setOffset(i*TIMESTEP)
-          sf.out()
+        if profile.isPlaying() and height < 200.0: # If playing and hands are down
+          profile.out.stop()
+        elif height>200.0 and not profile.isPlaying(): # If not playing and hands are up
+          source.setOffset(i*TIMESTEP)
+          profile.out.out()
 
-      if sf.isPlaying():
-        profile.step(frame, sf)
+      # Step the profile one timestep
+      profile.step(frame)
 
     elapsed = time.time() - now  # how long was it running?
     time.sleep(TIMESTEP-elapsed)    
