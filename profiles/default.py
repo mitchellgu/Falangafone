@@ -25,7 +25,7 @@ class DefaultProfile():
     self.eqs[2] = EQ(self.eqs[1], freq=self.EQ_FREQS[2], boost=0)
     self.eqs[3] = EQ(self.eqs[2], freq=self.EQ_FREQS[3], boost=0)
     self.eqs[4] = EQ(self.eqs[3], freq=self.EQ_FREQS[4], boost=0)
-    self.out = self.eqs[1]
+    self.out = self.eqs[4]
     self.out.out()
 
   def getBentness(self, hand0, hand1, fingerID):
@@ -72,7 +72,7 @@ class DefaultProfile():
       if roll > 0.5:
         self.source.setSpeed(clip(1 + (roll-0.5) * self.ROLL_GAIN, 1.0, 2.0))
       elif roll < -0.5:
-        self.source.setSpeed(clip(1 + (roll+0.5) * self.ROLL_GAIN, 0.0, 1.0))
+        self.source.setSpeed(clip(1 + (roll+0.5) * self.ROLL_GAIN, 0.5, 1.0))
       else:
         self.source.setSpeed(1)
       print "Playback Speed: " + str(self.source.speed)
