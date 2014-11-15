@@ -4,15 +4,20 @@ from pyo import *
 import Leap
 from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
 
+# Setup Pyo Stream
 s = Server().boot()
 s.start()
 snd = "call_me_maybe.aiff"
 sf = SfPlayer(snd).out()
 controller = Leap.Controller()
-i = 0
 
-FINGER_NAMES = ['Thumb', 'Index', 'Middle', 'Ring', 'Pinky']
-BONE_NAMES = ['Metacarpal', 'Proximal', 'Intermediate', 'Distal']
+# Initialize Frame Counter
+i = 0
+isPlaying = True
+
+# Clips number if less than a or greater than b
+def clip(num, a, b):
+  return min(max(num,a),b)
 
 while True:
     now = time.time()            # get the time
@@ -38,7 +43,13 @@ while True:
         height = frame.hands[0].palm_position.y + frame.hands[1].palm_position.y
         print "height: " + str(height)
         sf.setSpeed(distance/200.0)
-        sf.mul = height/800.0
+        sf.mul = clip((height-200)/400.0, 0.0, 1.0)
+        if isPlaying and height < 200.0:
+          isPlaying = False
+          sf.stop()
+        elif height>200.0 and not isPlaying:
+          isPlaying = True
+          sf.out()
 
     elapsed = time.time() - now  # how long was it running?
     time.sleep(0.02-elapsed)    
