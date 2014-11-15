@@ -1,7 +1,7 @@
 from pyo import *
 sys.path.insert(0, "../../../LeapSDK/lib")
 import Leap, math
-from Leap import *
+from Leap import Finger
 
 # Clips number if less than a or greater than b
 def clip(num, a, b):
@@ -11,12 +11,13 @@ class DefaultProfile():
 
   DISTANCE_GAIN = 1/200.0
   HEIGHT_GAIN = 1/800.0
+  THUMB_GAIN = 10
   source = None
   out = None
 
   def __init__(self, source):
     self.source = source
-    self.out = EQ(source, freq=100, q=1, boost=0, mul=0.1)
+    self.out = EQ(source, freq=70, q=1, boost=0, mul=0.1)
     self.out.out()
 
   def step(self, frame):
@@ -40,8 +41,10 @@ class DefaultProfile():
       angle1 = hand1.palm_normal.angle_to(thumb1.bone(1).direction.cross(hand1.direction))
       bentness0 = 1-abs(math.pi/2 - angle0) * 2 / math.pi
       bentness1 = 1-abs(math.pi/2 - angle1) * 2 / math.pi
-      print "Bentness 0: " + str(bentness0)
-      print "Bentness 1: " + str(bentness1)
+      #print "Bentness 0: " + str(bentness0)
+      #print "Bentness 1: " + str(bentness1)
+      self.out.setBoost(self.THUMB_GAIN * (bentness0 + bentness1 - 1))
+      print "Boost: " + str(self.THUMB_GAIN * (bentness0 + bentness1 - 1))
 
       # Set playback speed proportional to distance
       self.source.setSpeed(distance * self.DISTANCE_GAIN)
