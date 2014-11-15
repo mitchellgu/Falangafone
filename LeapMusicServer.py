@@ -61,6 +61,7 @@ class SongThread(threading.Thread):
 class LeapMusicServer:
 
   songThread = None
+  isplaying = False
 
   def __init__(self):
     # Setup Pyo Stream
@@ -70,12 +71,16 @@ class LeapMusicServer:
     self.controller = Leap.Controller()
 
   def start(self, snd="audio/call_me_maybe.aiff", profile=DefaultProfile):
-    source = SfPlayer("audio/call_me_maybe.aiff", mul=0.5)
-    self.songThread = SongThread(self.controller, source, profile)
-    self.songThread.start()
+    if self.isplaying ==False:
+        self.isplaying = True
+        source = SfPlayer("audio/call_me_maybe.aiff", mul=0.5)
+        self.songThread = SongThread(self.controller, source, profile)
+        self.songThread.start()
 
   def stop(self):
-    self.songThread.stop()
+    if self.isplaying ==True:
+        self.songThread.stop()
+        self.isplaying = False
 
 if __name__ == '__main__':
   server = LeapMusicServer()
