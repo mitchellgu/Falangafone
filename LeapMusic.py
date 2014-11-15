@@ -1,59 +1,48 @@
 import time, sys
 sys.path.insert(0, "../../LeapSDK/lib")
+sys.path.append("profiles")
 from pyo import *
 import Leap
-from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
+from default import *
 
 # Setup Pyo Stream
 s = Server().boot()
 s.start()
-snd = "call_me_maybe.aiff"
+snd = "audio/call_me_maybe.aiff"
 sf = SfPlayer(snd, mul=0.5).out()
-sf.ctrl()
 
 # Initialize Leap Controller
 controller = Leap.Controller()
 
-# Initialize Frame Counter
-i = 0
-offset = 0
+profile = DefaultProfile()
 
-# Clips number if less than a or greater than b
-def clip(num, a, b):
-  return min(max(num,a),b)
+# Initialize offset Counter, Timestep
+i = 0
+TIMESTEP = 0.05
 
 while True:
-    now = time.time()            # get the time
+    now = time.time()  # get the time
     print i
     if sf.isPlaying():
       i += 1 * sf.speed
 
     if(controller.is_connected): #controller is a Leap.Controller object
+      # Get frame
       frame = controller.frame()
+      # Print frame info
       print "Frame id: %d, timestamp: %d, hands: %d, fingers: %d, tools: %d, gestures: %d" % (frame.id, frame.timestamp, len(frame.hands), len(frame.fingers), len(frame.tools), len(frame.gestures()))
 
-      # Get hands
-      for hand in frame.hands:
-
-        handType = "Left hand" if hand.is_left else "Right hand"
-
-        print "  %s, id %d, position: %s" % (
-          handType, hand.id, hand.palm_position)
-
+      # Pause or play
       if len(frame.hands) == 2:
-        print "Two hands present!"
-        distance = frame.hands[0].palm_position.distance_to(frame.hands[1].palm_position)
-        print distance
         height = frame.hands[0].palm_position.y + frame.hands[1].palm_position.y
-        print "height: " + str(height)
-        sf.setSpeed(distance/200.0)
-        sf.mul = clip((height-200)/400.0, 0.0, 1.0)
-        if sf.isPlaying() and height < 200.0:
+        if sf.isPlaying() and height < 200.0: # If playing and hands are down
           sf.stop()
-          offset = i/50.0
-        elif height>200.0 and not sf.isPlaying():
-          sf.setOffset(offset)
+        elif height>200.0 and not sf.isPlaying(): # If not playing and hands are up
+          sf.setOffset(i*TIMESTEP)
           sf.out()
 
+      if sf.isPlaying():
+        profile.step(frame, sf)
+
     elapsed = time.time() - now  # how long was it running?
-    time.sleep(0.02-elapsed)    
+    time.sleep(TIMESTEP-elapsed)    
