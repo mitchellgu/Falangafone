@@ -9,7 +9,7 @@ from default import *
 s = Server().boot()
 s.start()
 snd = "audio/call_me_maybe.aiff"
-source = SfPlayer(snd)
+source = SfPlayer(snd, mul=0.5)
 
 # Initialize Leap Controller
 controller = Leap.Controller()
