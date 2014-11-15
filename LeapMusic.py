@@ -8,12 +8,15 @@ from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
 s = Server().boot()
 s.start()
 snd = "call_me_maybe.aiff"
-sf = SfPlayer(snd).out()
+sf = SfPlayer(snd, mul=0.5).out()
+sf.ctrl()
+
+# Initialize Leap Controller
 controller = Leap.Controller()
 
 # Initialize Frame Counter
 i = 0
-isPlaying = True
+offset = 0
 
 # Clips number if less than a or greater than b
 def clip(num, a, b):
@@ -22,7 +25,8 @@ def clip(num, a, b):
 while True:
     now = time.time()            # get the time
     print i
-    i += 1
+    if sf.isPlaying():
+      i += 1 * sf.speed
 
     if(controller.is_connected): #controller is a Leap.Controller object
       frame = controller.frame()
@@ -44,11 +48,11 @@ while True:
         print "height: " + str(height)
         sf.setSpeed(distance/200.0)
         sf.mul = clip((height-200)/400.0, 0.0, 1.0)
-        if isPlaying and height < 200.0:
-          isPlaying = False
+        if sf.isPlaying() and height < 200.0:
           sf.stop()
-        elif height>200.0 and not isPlaying:
-          isPlaying = True
+          offset = i/50.0
+        elif height>200.0 and not sf.isPlaying():
+          sf.setOffset(offset)
           sf.out()
 
     elapsed = time.time() - now  # how long was it running?
