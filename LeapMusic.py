@@ -1,9 +1,9 @@
 import sys
-sys.path.append("../")
-sys.path.append("../LeapSDK/lib")
-sys.path.append("../profiles")
-import LeapMusicServer
+sys.path.append("LeapSDK/lib")
+sys.path.append("profiles")
+from LeapMusicServer import LeapMusicServer
 from flask import *
+from default import *
 app = Flask(__name__)
 
 @app.route('/')
@@ -12,7 +12,11 @@ def index():
 
 @app.route('/start')
 def start():
-	server.start("audio/call_me_maybe.aiff", DefaultProfile)
+	server.start()
+
+@app.route('/stop')
+def stop():
+    server.stop()
 
 if __name__ == '__main__':
   server = LeapMusicServer()

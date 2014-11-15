@@ -54,7 +54,9 @@ class SongThread(threading.Thread):
           profile.step(frame)
 
         elapsed = time.time() - now  # how long was it running?
-        time.sleep(TIMESTEP-elapsed) 
+        time.sleep(TIMESTEP-elapsed)
+
+    profile.source.stop()
 
 class LeapMusicServer:
 
@@ -67,8 +69,8 @@ class LeapMusicServer:
     # Initialize Leap Controller
     self.controller = Leap.Controller()
 
-  def start(self, snd, profile):
-    source = SfPlayer(snd, mul=0.5)
+  def start(self, snd="audio/call_me_maybe.aiff", profile=DefaultProfile):
+    source = SfPlayer("audio/call_me_maybe.aiff", mul=0.5)
     self.songThread = SongThread(self.controller, source, profile)
     self.songThread.start()
 
