@@ -1,5 +1,5 @@
 import time, sys
-sys.path.insert(0, "../../LeapSDK/lib")
+sys.path.insert(0, "LeapSDK/lib")
 sys.path.append("profiles")
 from pyo import *
 import Leap
