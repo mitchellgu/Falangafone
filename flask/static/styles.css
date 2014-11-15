@@ -16,6 +16,13 @@
     /* inline-block space fix */
     margin-right:-4px;
 }
+.form-control {
+    width: 300px !important;
+}
+
+.equalizercontainer{
+  height:450px;
+}
 
 body {
     width: 100%;
@@ -36,7 +43,7 @@ h3,
 h4,
 h5,
 h6 {
-    margin: 0 0 35px;
+    margin: 0 0 10px;
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
@@ -151,7 +158,6 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    background: url('../img/graph net.png') no-repeat bottom center scroll;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -174,16 +180,16 @@ a:focus {
 
 @media(min-width:767px) {
     .intro {
-        height: 50%;
+        height: 35%;
         padding: 0;
     }
 
     .intro .intro-body .brand-heading {
-        font-size: 80px;
+        font-size: 40px;
     }
 
     .intro .intro-body .intro-text {
-        font-size: 25px;
+        font-size: 18px;
     }
 }
 
