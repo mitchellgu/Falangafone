@@ -81,4 +81,4 @@ class DefaultProfile():
       self.source.mul = clip((height-200) * self.HEIGHT_GAIN, 0.0, 0.5)
 
   def isPlaying(self):
-    return self.out.isPlaying()
+    return self.source.isPlaying()

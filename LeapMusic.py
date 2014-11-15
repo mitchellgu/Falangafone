@@ -24,7 +24,7 @@ while True:
     now = time.time()  # get the time
     print i
     if profile.isPlaying():
-      i += 1 * source.speed
+      i += 1 * profile.source.speed
 
     if(controller.is_connected): #controller is a Leap.Controller object
       # Get frame
@@ -36,10 +36,10 @@ while True:
       if len(frame.hands) == 2:
         height = frame.hands[0].palm_position.y + frame.hands[1].palm_position.y
         if profile.isPlaying() and height < 200.0: # If playing and hands are down
-          profile.out.stop()
+          profile.source.stop()
         elif height>200.0 and not profile.isPlaying(): # If not playing and hands are up
-          source.setOffset(i*TIMESTEP)
-          profile.out.out()
+          profile.source.setOffset(i*TIMESTEP)
+          profile.source.out()
 
       # Step the profile one timestep
       profile.step(frame)
