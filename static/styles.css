@@ -15,18 +15,21 @@ p.description {
 }
 
 body {
-    background-color: #333;
-    color: #FAFAFA;
+    background-color: white;
+    color: black;
 }
 
 header {
-    background: #5daa00;
-    color: #222;
+    background: #f8f8f8;
+    color: black;
     height: 80px;
+    border-bottom: 2px #428bca solid;
+
 }
 
 section.song {
-    background-color: rgb(29, 94, 86);
+    color: white;
+    background-color: #428bca;
     padding: 10px;
 }
 
@@ -40,7 +43,7 @@ section.content {
 }
 
 .horizontal-bar div {
-    border: 2px solid olive;
+    border: 2px solid #5cb85c;
     border-radius: 10px;
 }
 
@@ -49,7 +52,7 @@ section.content {
     margin: 0;
     padding: 20px 0;
     width: 50%;
-    background-color: orange;
+    background-color: #5cb85c;
     border-radius: 7px;
     transition: width .5s;
 }
@@ -71,7 +74,7 @@ section.content {
 }
 
 #equalizer div div {
-    border: 2px solid olive;
+    border: 2px solid #5cb85c;
     border-radius: 10px;
     height: 404px;
 }
@@ -83,7 +86,7 @@ section.content {
     right: 0;
     border: none;
     margin: 0;
-    background-color: orange;
+    background-color: #5cb85c;
     border-radius: 7px;
     height: 50%;
     transition: height 0.5s;
