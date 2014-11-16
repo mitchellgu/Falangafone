@@ -36,6 +36,7 @@ section.content {
 
 .horizontal-bar {
     position: relative;
+    margin-bottom: 10px;
 }
 
 .horizontal-bar div {
@@ -46,7 +47,7 @@ section.content {
 .horizontal-bar div div {
     border: none;
     margin: 0;
-    padding: 20px;
+    padding: 20px 0;
     width: 50%;
     background-color: orange;
     border-radius: 7px;
@@ -62,6 +63,30 @@ section.content {
 
 #equalizer {
     padding: 20px;
+}
+
+#equalizer div {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+#equalizer div div {
+    border: 2px solid olive;
+    border-radius: 10px;
+    height: 404px;
+}
+
+#equalizer div div div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: none;
+    margin: 0;
+    background-color: orange;
+    border-radius: 7px;
+    height: 50%;
+    transition: height 0.5s;
 }
 
 #about p{

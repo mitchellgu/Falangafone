@@ -81,7 +81,13 @@ class DefaultProfile:
       # Set playback volume proportional to height
       self.source.mul = clip((height-200) * self.HEIGHT_GAIN, 0.0, 1.0)
 
-    return {"volume": str(int(round(self.source.mul*100))) + "%", "speed": str(int(round(self.source.speed * 100))) + "%"}
+    return {"volume": str(int(round(self.source.mul*100))) + "%",
+            "speed": str(int(round(self.source.speed * 100))) + "%",
+            "eq0": (self.eqs[0].boost + 15.0)/30.0 * 100,
+            "eq1": (self.eqs[1].boost + 15.0)/30.0 * 100,
+            "eq2": (self.eqs[2].boost + 15.0)/30.0 * 100,
+            "eq3": (self.eqs[3].boost + 15.0)/30.0 * 100,
+            "eq4": (self.eqs[4].boost + 15.0)/30.0 * 100}
 
   def isPlaying(self):
     return self.source.isPlaying()
