@@ -14,16 +14,14 @@ def index():
 def about():
     return render_template('about.html')
 
-
-@app.route('/start')
-def start():
-	server.start()
-	return "OK", 200
-
-@app.route('/stop')
-def stop():
-  server.stop()
-  return "OK", 200
+@app.route('/toggle')
+def toggle():
+	if server.isplaying:
+	  server.stop()
+	  return "OK", 200
+	else:
+		server.start()
+		return "OK", 200
 
 @app.route('/params')
 def params():
