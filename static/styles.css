@@ -34,11 +34,30 @@ section.content {
     margin-top: 20px;
 }
 
-.horizontal-bar p {
+.horizontal-bar {
+    position: relative;
+}
+
+.horizontal-bar div {
+    border: 2px solid olive;
+    border-radius: 10px;
+}
+
+.horizontal-bar div div {
+    border: none;
     margin: 0;
-    padding: 10px;
+    padding: 20px;
+    width: 50%;
     background-color: orange;
-    margin-bottom: 10px;
+    border-radius: 7px;
+    transition: width .5s;
+}
+
+.horizontal-bar label {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 12px;
 }
 
 #equalizer {
