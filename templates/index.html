@@ -13,35 +13,33 @@
   <header class="intro container-fluid">
     <div class="container">
       <div class="row">
-          <div class="col-sm-4">
-            <h1 class="brand-heading"><a href="/">Falangafone</a></h1>
-          </div>
-          <div class="col-sm-8 hidden-xs">
-              <p class="description">Control your music with Leap Motion -- Select a song to begin. </br> Want to know what each gesture does? Click <a href="about">here</a>.</p>
-          </div>
+        <div class="col-sm-4">
+          <h1 class="brand-heading"><a href="/">Falangafone</a></h1>
+        </div>
+        <div class="col-sm-8 hidden-xs">
+          <p class="description">Control your music with Leap Motion -- Select a song to begin. </br> Want to know what each gesture does? Click <a href="about">here</a>.</p>
+        </div>
       </div>
     </div>
   </header>
   <section class="container-fluid song">
     <div class="row row-centered">
-        <span id="song">Not playing anything</span>
+      <span id="song">Press the Start Button on the Electric Imp to Begin!</span>
     </div>
   </section>
   <section class="container content">
-    <div class="row row-centered">
-      <div class="col-sm-6">
-      <label>Volume: <span id="volume"></span></label>
-    </div>
-    <div class="col-sm-6">
-      <label>Speed: <span id="speed"></span></label>
-    </div>
-    </div>
 
     <div class="row row-centered">
-      <div class="col-sm-6 horizontal-bar">
+      <div class="col-md-4 col-sm-4 col-xs-12 horizontal-bar">
+        <label>Volume: <span id="volume"></span></label>
         <div><div id="volume-bar"></div></div>
       </div>
-      <div class="col-sm-6 horizontal-bar">
+      <div class="col-md-4 col-sm-4 col-xs-12 horizontal-bar">
+        <label>Pan: <span id="pan"></span></label>
+        <div><div id="pan-bar"></div></div>
+      </div>
+      <div class="col-md-4 col-sm-4 col-xs-12 horizontal-bar">
+        <label>Speed: <span id="speed"></span></label>
         <div><div id="speed-bar"></div></div>
       </div>
     </div>
@@ -52,26 +50,36 @@
             <div>
               <div></div>
             </div>
+            <p id="eq0-value" class="eq-value">0 dB</p>
+            <p class="eq-label">53 Hz</p>
           </div>
           <div id="eq1" class="col-xs-2">
             <div>
               <div></div>
             </div>
+            <p id="eq1-value" class="eq-value">0 dB</p>
+            <p class="eq-label">237 Hz</p>
           </div>
           <div id="eq2" class="col-xs-2">
             <div>
               <div></div>
             </div>
+            <p id="eq2-value" class="eq-value">0 dB</p>
+            <p class="eq-label">1020 Hz</p>
           </div>
           <div id="eq3" class="col-xs-2">
             <div>
               <div></div>
             </div>
+            <p id="eq3-value" class="eq-value">0 dB</p>
+            <p class="eq-label">3677 Hz</p>
           </div>
           <div id="eq4" class="col-xs-2">
             <div>
               <div></div>
             </div>
+            <p id="eq4-value" class="eq-value">0 dB</p>
+            <p class="eq-label">10200 Hz</p>
           </div>
         </div>
       </div>

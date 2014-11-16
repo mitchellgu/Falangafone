@@ -25,7 +25,8 @@ class DefaultProfile:
     self.eqs[2] = EQ(self.eqs[1], freq=self.EQ_FREQS[2], boost=0)
     self.eqs[3] = EQ(self.eqs[2], freq=self.EQ_FREQS[3], boost=0)
     self.eqs[4] = EQ(self.eqs[3], freq=self.EQ_FREQS[4], boost=0)
-    self.out = self.eqs[4]
+    self.pan = Pan(self.eqs[4])
+    self.out = self.pan
 
   def getBentness(self, hand0, hand1, fingerID):
     # Compute bentness based on finger coplanarity with palm in direction of articulation
@@ -64,6 +65,12 @@ class DefaultProfile:
       height = hand0.palm_position.y + hand1.palm_position.y
       print "Height: " + str(height)
 
+      # Compute difference in height of palm positions
+      ydiff = (-hand0.palm_position.y + hand1.palm_position.y)/500.0
+
+      # Set playback pan proportional to ydiff
+      self.pan.setPan(clip(ydiff + 0.5, 0, 1))
+
       for fingerID in range(len(self.FINGER_IDS)):
         bentness = self.getBentness(hand0, hand1, fingerID)
         self.eqs[fingerID].setBoost(self.EQ_GAINS[fingerID] * (bentness - 1))
@@ -83,6 +90,7 @@ class DefaultProfile:
 
     return {"volume": str(int(round(self.source.mul*100))),
             "speed": str(int(round(self.source.speed * 100))),
+            "pan": str(int(round(self.pan.pan*100))),
             "eq0": (self.eqs[0].boost + 15.0)/30.0 * 100,
             "eq1": (self.eqs[1].boost + 15.0)/30.0 * 100,
             "eq2": (self.eqs[2].boost + 15.0)/30.0 * 100,

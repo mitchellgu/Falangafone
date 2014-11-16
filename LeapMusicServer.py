@@ -11,7 +11,7 @@ class SongThread(threading.Thread):
   """Thread class with a stop() method. The thread itself has to check
   regularly for the stopped() condition."""
 
-  parameters = {"volume": "stopped", "speed": "stopped", "eq0": 50, "eq1": 50, "eq2": 50, "eq3": 50, "eq4": 50}
+  parameters = {"volume": "stopped", "speed": "stopped", "pan": "stopped", "eq0": 50, "eq1": 50, "eq2": 50, "eq3": 50, "eq4": 50}
 
   def __init__(self, server, controller, source, profile):
       super(SongThread, self).__init__()
