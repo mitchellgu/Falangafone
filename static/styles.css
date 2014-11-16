@@ -34,6 +34,17 @@ section.content {
     margin-top: 20px;
 }
 
+.horizontal-bar p {
+    margin: 0;
+    padding: 10px;
+    background-color: orange;
+    margin-bottom: 10px;
+}
+
+#equalizer {
+    padding: 20px;
+}
+
 /*
 .col-centered {
     display:inline-block;
