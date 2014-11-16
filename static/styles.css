@@ -64,6 +64,10 @@ section.content {
     padding: 20px;
 }
 
+#about p{
+  text-align: left;
+}
+
 /*
 .col-centered {
     display:inline-block;
@@ -81,9 +85,6 @@ section.content {
   height:450px;
 }
 
-#about p{
-  text-align: left;
-}
 
 body {
     width: 100%;
