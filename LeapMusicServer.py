@@ -63,7 +63,7 @@ class SongThread(threading.Thread):
             if abs(maxSwipe.direction[0]) > abs(maxSwipe.direction[1]):
               if maxSwipe.direction[0] > 0: # swipe right
                 self.server.prevTrack()
-              else: 
+              else:
                 self.server.nextTrack()
 
           # Step the profile one timestep
@@ -95,7 +95,8 @@ class LeapMusicServer:
     for (dirpath, dirnames, filenames) in walk('audio'):
       self.TRACKS.extend(filenames)
       break
-    self.TRACKS.remove(".DS_Store")
+    if os.path.exists(".DS_STORE"):
+      self.TRACKS.remove(".DS_Store")
 
   def start(self, profile):
     if self.isplaying ==False:
