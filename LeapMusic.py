@@ -20,7 +20,7 @@ def toggle():
 	  server.stop()
 	  return "OK", 200
 	else:
-		server.start()
+		server.start(DefaultProfile)
 		return "OK", 200
 
 @app.route('/params')
@@ -28,7 +28,7 @@ def params():
 	if server.isplaying:
 		return jsonify(server.getParameters()), 200
 	else:
-		return jsonify({"volume": "stopped", "speed": "stopped"}), 200
+		return jsonify({"volume": "stopped", "speed": "stopped", "eq0": 50, "eq1": 50, "eq2": 50, "eq3": 50, "eq4": 50}), 200
 
 if __name__ == '__main__':
   server = LeapMusicServer()

@@ -13,8 +13,10 @@ $(function() {
             $("#eq2 div div").css("height", data.eq2 + "%");
             $("#eq3 div div").css("height", data.eq3 + "%");
             $("#eq4 div div").css("height", data.eq4 + "%");
+            $("#eq4 div div").css("height", data.eq4 + "%");
+            $("#song").text(data.track)
        }, dataType: "json", complete: poll });
-    }, 300);
+    }, 400);
 })();
 
 });
