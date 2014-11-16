@@ -68,6 +68,11 @@ section.content {
   text-align: left;
 }
 
+.brand-heading a{
+  color: inherit;
+  text-decoration: inherit; /* no underline */
+}
+
 /*
 .col-centered {
     display:inline-block;
