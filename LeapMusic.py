@@ -23,7 +23,7 @@ def stop():
 @app.route('/params')
 def params():
 	if server.isplaying:
-		return jsonify({"height": str(server.getParameters())}), 200
+		return jsonify(server.getParameters()), 200
 	else:
 		return jsonify({"height": "N/A"}), 200
 

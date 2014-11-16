@@ -11,7 +11,7 @@ class DefaultProfile:
 
   FINGER_IDS = [Finger.TYPE_THUMB, Finger.TYPE_INDEX, Finger.TYPE_MIDDLE, Finger.TYPE_RING, Finger.TYPE_PINKY]
   ROLL_GAIN = 1/4.0
-  HEIGHT_GAIN = 1/800.0
+  HEIGHT_GAIN = 1/400.0
   EQ_FREQS = [53, 237, 1020, 3677, 10200]
   EQ_GAINS = [15, 15, 15, 15, 15]
   source = None
@@ -79,9 +79,9 @@ class DefaultProfile:
       print "Playback Speed: " + str(self.source.speed)
 
       # Set playback volume proportional to height
-      self.source.mul = clip((height-200) * self.HEIGHT_GAIN, 0.0, 0.5)
+      self.source.mul = clip((height-200) * self.HEIGHT_GAIN, 0.0, 1.0)
 
-      return str(height)
+    return {"volume": "%.2f" % self.source.mul}
 
   def isPlaying(self):
     return self.source.isPlaying()

@@ -54,7 +54,7 @@ class SongThread(threading.Thread):
               self.source.out()
 
           # Step the profile one timestep
-          self.parameters = str(self.profile.step(frame))
+          self.parameters = self.profile.step(frame)
 
         elapsed = time.time() - now  # how long was it running?
         time.sleep(TIMESTEP-elapsed)
@@ -62,7 +62,7 @@ class SongThread(threading.Thread):
     self.profile.source.stop()
 
   def getParameters(self):
-    return str(self.parameters)
+    return self.parameters
 
 class LeapMusicServer:
 
