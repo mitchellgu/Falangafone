@@ -26,7 +26,6 @@ class DefaultProfile:
     self.eqs[3] = EQ(self.eqs[2], freq=self.EQ_FREQS[3], boost=0)
     self.eqs[4] = EQ(self.eqs[3], freq=self.EQ_FREQS[4], boost=0)
     self.out = self.eqs[4]
-    self.out.out()
 
   def getBentness(self, hand0, hand1, fingerID):
     # Compute bentness based on finger coplanarity with palm in direction of articulation
@@ -44,6 +43,8 @@ class DefaultProfile:
     #print "Bentness for FingerID = " + str(fingerID) + ": " + str(bentness)
     return bentness
 
+  def start(self):
+    self.out.out()
 
   def step(self, frame):
     if self.out.isPlaying() and len(frame.hands) == 2:
@@ -79,6 +80,8 @@ class DefaultProfile:
 
       # Set playback volume proportional to height
       self.source.mul = clip((height-200) * self.HEIGHT_GAIN, 0.0, 0.5)
+
+      return str(height)
 
   def isPlaying(self):
     return self.source.isPlaying()

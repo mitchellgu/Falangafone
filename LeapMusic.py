@@ -13,10 +13,19 @@ def index():
 @app.route('/start')
 def start():
 	server.start()
+	return "OK", 200
 
 @app.route('/stop')
 def stop():
-    server.stop()
+  server.stop()
+  return "OK", 200
+
+@app.route('/params')
+def params():
+	if server.isplaying:
+		return jsonify({"height": str(server.getParameters())}), 200
+	else:
+		return jsonify({"height": "N/A"}), 200
 
 if __name__ == '__main__':
   server = LeapMusicServer()

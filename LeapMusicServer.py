@@ -9,11 +9,14 @@ class SongThread(threading.Thread):
   """Thread class with a stop() method. The thread itself has to check
   regularly for the stopped() condition."""
 
+  parameters = None
+
   def __init__(self, controller, source, profile):
       super(SongThread, self).__init__()
       self.source = source
       self.controller = controller
-      self.profile = profile
+      self.controller.set_policy_flags(Leap.Controller.POLICY_BACKGROUND_FRAMES);
+      self.profile = profile(self.source)
       self._stop = threading.Event()
 
   def stop(self):
@@ -23,7 +26,7 @@ class SongThread(threading.Thread):
       return self._stop.isSet()
 
   def run(self):
-    profile = self.profile(self.source)
+    self.profile.start()
 
     # Initialize offset Counter, Timestep
     i = 0
@@ -32,8 +35,8 @@ class SongThread(threading.Thread):
     while not self.stopped():
         now = time.time()  # get the time
         print i
-        if profile.isPlaying():
-          i += 1 * profile.source.speed
+        if self.source.isPlaying():
+          i += 1 * self.source.speed
 
         if(self.controller.is_connected): #controller is a Leap.Controller object
           # Get frame
@@ -44,19 +47,22 @@ class SongThread(threading.Thread):
           # Pause or play
           if len(frame.hands) == 2:
             height = frame.hands[0].palm_position.y + frame.hands[1].palm_position.y
-            if profile.isPlaying() and height < 200.0: # If playing and hands are down
-              profile.source.stop()
-            elif height>200.0 and not profile.isPlaying(): # If not playing and hands are up
-              profile.source.setOffset(i*TIMESTEP)
-              profile.source.out()
+            if self.source.isPlaying() and height < 200.0: # If playing and hands are down
+              self.source.stop()
+            elif height>200.0 and not self.source.isPlaying(): # If not playing and hands are up
+              self.source.setOffset(i*TIMESTEP)
+              self.source.out()
 
           # Step the profile one timestep
-          profile.step(frame)
+          self.parameters = str(self.profile.step(frame))
 
         elapsed = time.time() - now  # how long was it running?
         time.sleep(TIMESTEP-elapsed)
 
-    profile.source.stop()
+    self.profile.source.stop()
+
+  def getParameters(self):
+    return str(self.parameters)
 
 class LeapMusicServer:
 
@@ -81,6 +87,9 @@ class LeapMusicServer:
     if self.isplaying ==True:
         self.songThread.stop()
         self.isplaying = False
+
+  def getParameters(self):
+    return self.songThread.getParameters()
 
 if __name__ == '__main__':
   server = LeapMusicServer()
