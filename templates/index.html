@@ -10,43 +10,39 @@
 </head>
 
 <body>
-  <header class="intro">
-      <div class="intro-body">
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-8 col-md-offset-2">
-                      <h1 class="brand-heading">Leap Music</h1>
-                      <p class="intro-text">Control your music with Leap Motion -- Select a song to begin. </br> Want to know what each gesture does? Click <a href="about.html">here</a>.</p>
-                  </div>
-              </div>
-              <div class="row row-centered">
-                  Song: <div class="form-group col-lg-2 col-centered">
-                    <select class="form-control">
-                        <option value="callmemaybe">Call Me Maybe - Carly Rae Jepsen</option>
-                        <option value="maps">Maps - Maroon 5</option>
-                        <option value="trolololol">Trololo - Eduard Khil</option>
-                        <option value="furelise">Für Elise - Ludwig van Beethoven</option>
-                        <option value="supermassiveblackhole">Supermassive Black Hole - Muse</option>
-                    </select>
-                  </div>
-              </div>
-              <div class="row row-centered">
-                <div class="col-xs-6">
-                  <p>Volume: <span id="volume"></span></p>
-                </div>
-                <div class="col-xs-6">
-                  <p>Speed: <span id="speed"></span></p>
-                </div>
-              </div>
-              <div class="row row-centered">
-                <div class="col-xs-2 col-xs-offset-1">.col-xs-2</div>
-                <div class="col-xs-2">.col-xs-2</div>
-                <div class="col-xs-2">.col-xs-2</div>
-                <div class="col-xs-2">.col-xs-2</div>
-                <div class="col-xs-2">.col-xs-2</div>
-
-              </div>
+  <header class="intro container-fluid">
+    <div class="container">
+      <div class="row">
+          <div class="col-sm-4">
+              <h1 class="brand-heading">Leap Music</h1>
+          </div>
+          <div class="col-sm-8">
+              <p class="description">Control your music with Leap Motion -- Select a song to begin. </br> Want to know what each gesture does? Click <a href="about.html">here</a>.</p>
           </div>
       </div>
+    </div>
   </header>
+  <section class="container-fluid song">
+    <div class="row row-centered">
+        Song: <span id="song">Call Me Maybe - Carly Rae Jepsen</span>
+    </div>
+  </section>
+  <section class="container content">
+    <div class="row row-centered">
+      <div class="col-xs-6">
+        <p>Volume: <span id="volume"></span></p>
+      </div>
+      <div class="col-xs-6">
+        <p>Speed: <span id="speed"></span></p>
+      </div>
+    </div>
+    <div class="row row-centered">
+      <div class="col-xs-2 col-xs-offset-1">.col-xs-2</div>
+      <div class="col-xs-2">.col-xs-2</div>
+      <div class="col-xs-2">.col-xs-2</div>
+      <div class="col-xs-2">.col-xs-2</div>
+      <div class="col-xs-2">.col-xs-2</div>
+
+    </div>
+  </span>
 </body>
