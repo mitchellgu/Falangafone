@@ -28,7 +28,7 @@ def params():
 	if server.isplaying:
 		return jsonify(server.getParameters()), 200
 	else:
-		return jsonify({"height": "N/A"}), 200
+		return jsonify({"volume": "stopped", "speed": "stopped"}), 200
 
 if __name__ == '__main__':
   server = LeapMusicServer()

@@ -70,8 +70,8 @@ class DefaultProfile:
         print "Boost for EQ" + str(fingerID) + ": " + str(self.EQ_GAINS[fingerID] * (bentness - 1))
 
       # Set playback speed proportional to roll
-      if roll > 0.5:
-        self.source.setSpeed(clip(1 + (roll-0.5) * self.ROLL_GAIN, 1.0, 2.0))
+      if roll > 0.7:
+        self.source.setSpeed(clip(1 + (roll-0.7) * self.ROLL_GAIN, 1.0, 2.0))
       elif roll < -0.5:
         self.source.setSpeed(clip(1 + (roll+0.5) * self.ROLL_GAIN, 0.5, 1.0))
       else:
@@ -81,7 +81,7 @@ class DefaultProfile:
       # Set playback volume proportional to height
       self.source.mul = clip((height-200) * self.HEIGHT_GAIN, 0.0, 1.0)
 
-    return {"volume": "%.2f" % self.source.mul}
+    return {"volume": str(int(round(self.source.mul*100))) + "%", "speed": str(int(round(self.source.speed * 100))) + "%"}
 
   def isPlaying(self):
     return self.source.isPlaying()
